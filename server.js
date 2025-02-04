@@ -8,6 +8,11 @@ app.use(cors());
 
 const PORT = process.env.PORT || 3000;
 
+app.get('/', (req, res) => {
+    res.send('Hello from the Express server!');
+});
+
+
 app.get('/movies', async (req, res) => {
     try {
         const response = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.TMDB_API_KEY}`);
