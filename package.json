@@ -15,13 +15,6 @@
     "express": "^4.21.2",
     "node-fetch": "^3.3.2"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/BBOCen/movie-searcher-js.git"
-  },
-  "bugs": {
-    "url": "https://github.com/BBOCen/movie-searcher-js/issues"
-  },
-  "homepage": "https://github.com/BBOCen/movie-searcher-js#readme",
+  "devDependencies": {},
   "description": ""
 }
