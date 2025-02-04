@@ -8,6 +8,9 @@ app.use(cors());
 
 const PORT = process.env.PORT || 3000;
 
+app.use(express.static('public'));  // This will serve files from the 'public' folder
+
+
 app.get('/', (req, res) => {
     res.send('Hello from the Express server!');
 });
