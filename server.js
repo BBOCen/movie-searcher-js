@@ -2,14 +2,20 @@ import 'dotenv/config';
 import express from 'express';
 import fetch from 'node-fetch';
 import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 app.use(cors());
+app.use(express.static(path.join(__dirname, 'public')));
 
 const PORT = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
-    res.send('Hello from the Express server!');
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.get('/movie/:movie_id/videos', async (req, res) => {
