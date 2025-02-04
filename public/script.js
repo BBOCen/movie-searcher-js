@@ -1,18 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
     let search_button = document.getElementById("search-btn");
-    let search_input= document.getElementById("search-box");
+    let search_input = document.getElementById("search-box");
 
     search_button.addEventListener("click", async () => {
         let search_query = search_input.value.toLowerCase();
         let search_results = await fetchResults(search_query);
         printResults(search_results);
         console.log(search_results);
-        console.log(search_query);
     });
 
     async function fetchResults(search_query) {
-        let results = await fetch(`/search?query=${search_query}`);
+        let results = await fetch(`https://movie-searcher-js.onrender.com/search?query=${search_query}`);
         results = await results.json();
+        console.log(results);
         return results;
     }
 
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let movie_card = document.createElement("div");
             movie_card.classList.add("movie-card");
             movie_card.innerHTML = `
-                <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+                <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" onerror="this.onerror=null; this.src='./img/404.jpg';" alt="${movie.title}">
                 <h3>${movie.title}</h3>
                 <p>⭐ ${movie.vote_average} | 📅 ${movie.release_date}</p>
             `;
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         movie_details.innerHTML = `
             <section id="movie-details">
-                <button id="close-details">✖ Close</button>
+                <button id="close-details">✖</button>
                 <div class="details-container">
                     <img id="movie-poster" src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}" onerror="this.onerror=null; this.src='./img/404.jpg';">
                     <div class="info">
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     async function obtainTrailer(movie_id) {
-        let results = await fetch(`/movie/${movie_id}/videos`);
+        let results = await fetch(`https://movie-searcher-js.onrender.com/movie/${movie_id}/videos?language=en-US`);
         results = await results.json();
 
         for (let video of results.results) {
